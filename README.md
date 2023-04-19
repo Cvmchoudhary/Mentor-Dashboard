@@ -1,5 +1,5 @@
 # mentorship-dashboard
-Mentor management dashboard with features to assign, evaluate, edit/remove and submit marks for students with filtering options.
+Mentor management dashboard for evaluating college students. Features include adding, editing, and removing students, assigning marks to each student, and a filter for viewing students based on their assigned marks. Supports up to 4 students per mentor and prevents duplicate assignments and an added email feature.
 
 - MentorSelectPage: A page for mentors to select a student to evaluate.
 ![1](https://user-images.githubusercontent.com/64316945/233101274-b08ea853-9cc5-4320-b519-48d4eaea0683.PNG)
@@ -12,3 +12,6 @@ Mentor management dashboard with features to assign, evaluate, edit/remove and s
 
 - StudentEvaluationPage: A page for mentors to evaluate a selected student.
 ![4](https://user-images.githubusercontent.com/64316945/233101301-4448f54d-bd1c-4a4a-8491-14f28958c33e.PNG)
+
+- Added Email Feature: Email containing PDF marksheet is sent to the student once the mentor completes his/her evaluation.
+![image](https://user-images.githubusercontent.com/64316945/233103158-f3573f97-02a6-4735-97c5-f120cf100403.png)
