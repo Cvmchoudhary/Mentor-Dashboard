@@ -21,4 +21,4 @@ A web-based dashboard for mentors to evaluate college students. Features include
 
 ## Prerequisites
 
-To enable mail sending functionality, make sure to create a .env file with the required credentials for the EMAIL and APP_PASS fields.
+To enable mail sending functionality, make sure to create a .env file with the required credentials for the EMAIL and APP_PASS (GMAIL) fields and place it in the backend folder.
