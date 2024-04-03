@@ -78,8 +78,12 @@ const assignStudent = (req, res) => {
       }
 
       let { count } = result[0];
-      if (count > 3) {
-        return res.status(400).send("Mentor already has 4 students assigned");
+
+      // New logic for minimum 3 and maximum 4 students
+      if (count + studentIds.length < 3) {
+        return res.status(400).send("Minimum 3 students are required");
+      } else if (count + studentIds.length > 4) {
+        return res.status(400).send("Maximum 4 students can be assigned");
       }
 
       // Check if the students already have a mentor assigned
@@ -114,13 +118,6 @@ const assignStudent = (req, res) => {
               .send("One or more students have already been evaluated");
           }
 
-          // Check if number of students to be assigned + number of already assigned students > 4
-          if(studentIds.length + count > 4){
-            return res
-              .status(400)
-              .send("Total students are greater than 4");
-          }
-
           // Assign the students to the mentor
           const assignStudentsQuery = `UPDATE students SET mentor_id = ${mentorId} WHERE id IN (${studentIds.join(
             ","
@@ -140,6 +137,7 @@ const assignStudent = (req, res) => {
     });
   });
 };
+
 
 // Controller for unassigning a student from a mentor
 const unassignStudent = (req, res) => {

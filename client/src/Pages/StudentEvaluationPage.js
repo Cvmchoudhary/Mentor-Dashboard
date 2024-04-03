@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import NavigationBar from "../Components/NavigationBar";
@@ -6,67 +6,51 @@ import { useNavigate } from "react-router-dom";
 import { evaluateStudent, getStudentMarks, markStudent } from "../utils/api";
 
 const StudentEvaluationPage = () => {
-  // Get the mentor value from localStorage
   let mentor = localStorage.getItem("mentor");
   if (mentor) mentor = JSON.parse(mentor);
 
   const navigate = useNavigate();
-
-  // Get the student ID from the URL parameters
   const params = useParams();
   const studentId = params.id;
 
-  // Set up state for the student's evaluation marks
   const [student, setStudent] = useState({
     idea_marks: "",
     execution_marks: "",
-    presentation_marks: "",
+    viva_marks: "", // Changed from presentation_marks to viva_marks
     communication_marks: "",
     total_marks: "",
   });
 
-  // Function to handle form submission and save the student's marks
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await markStudent(mentor.id, student.id, {
+    await markStudent(mentor.id, studentId, {
       idea_marks: student.idea_marks,
       execution_marks: student.execution_marks,
-      presentation_marks: student.presentation_marks,
+      viva_marks: student.viva_marks, // Changed from presentation_marks to viva_marks
       communication_marks: student.communication_marks,
     });
     await fetchStudentDetails();
   };
 
-  // Function to handle when the evaluation is complete and save the final marks
   const handleCompleteEvaluation = async () => {
-    await evaluateStudent(mentor.id, student.id);
+    await evaluateStudent(mentor.id, studentId);
     navigate("/student-view");
   };
 
-  // Function to fetch the student's evaluation marks from the server
   const fetchStudentDetails = async () => {
     const data = await getStudentMarks(studentId);
-    // Set state with the fetched data, converting any null values to 0
     setStudent({
       ...data,
-      // Convert any null values to 0 using the bitwise OR operator
       idea_marks: data.idea_marks | 0,
       execution_marks: data.execution_marks | 0,
-      presentation_marks: data.presentation_marks | 0,
+      viva_marks: data.viva_marks | 0, // Changed from presentation_marks to viva_marks
       communication_marks: data.communication_marks | 0,
       total_marks: data.total_marks | 0,
     });
   };
 
-  // Use the useEffect hook to fetch the student's marks when the component mounts
   useEffect(() => {
     fetchStudentDetails();
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    fetchStudentDetails();
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -103,14 +87,14 @@ const StudentEvaluationPage = () => {
               }
             />
           </Form.Group>
-          <Form.Group controlId="presentationMarks" className="mt-2">
-            <Form.Label>Presentation Marks</Form.Label>
+          <Form.Group controlId="vivaMarks" className="mt-2">
+            <Form.Label>Viva Marks</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Enter presentation marks"
-              value={student?.presentation_marks}
+              placeholder="Enter viva marks"
+              value={student?.viva_marks}
               onChange={(e) =>
-                setStudent({ ...student, presentation_marks: e.target.value })
+                setStudent({ ...student, viva_marks: e.target.value })
               }
             />
           </Form.Group>

@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
+  password: 'root123',
 });
 
 // Create the "dashboard" database if it doesn't already exist
