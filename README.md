@@ -5,7 +5,7 @@ A web-based dashboard for mentors to evaluate college students. Features include
 ## Screenshots
 
 * MentorSelectPage: A page to select a mentor.
-![1](https://github.com/Cvmchoudhary/Mentor-Dashboard/blob/main/img1.png)
+![1](https://user-images.githubusercontent.com/64316945/233101274-b08ea853-9cc5-4320-b519-48d4eaea0683.PNG)
 
 * StudentSelectPage: A page for mentor to select students for evaluation.
 ![2](https://github.com/Cvmchoudhary/Mentor-Dashboard/blob/main/img2.png)
